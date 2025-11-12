@@ -1,0 +1,67 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>Inicio de sesion</h2>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <input
+          type="text"
+          [(ngModel)]="nombreUsuario"
+          placeholder="Nombre de usuario"
+          class="form-input"
+        />
+        <button
+          class="clear-btn"
+          (click)="limpiarCampo('usuario')"
+          *ngIf="nombreUsuario"
+        >
+          <span class="close-icon">✕</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <input
+          type="password"
+          [(ngModel)]="contrasena"
+          placeholder="Contraseña"
+          class="form-input"
+        />
+        <button
+          class="clear-btn"
+          (click)="limpiarCampo('contrasena')"
+          *ngIf="contrasena"
+        >
+          <span class="close-icon">✕</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="recordar-group">
+      <label class="checkbox-label">
+        <input
+          type="checkbox"
+          [(ngModel)]="recordarme"
+          class="checkbox-input"
+        />
+        <span class="checkbox-text">Recordarme</span>
+      </label>
+    </div>
+
+    <button class="btn-iniciar" (click)="iniciarSesion()">
+      Iniciar sesion
+    </button>
+
+    <div class="footer-buttons">
+      <button class="btn-secundario" (click)="olvidoContrasena()">
+        ¿Olvidaste tu contraseña?
+      </button>
+      <button class="btn-secundario outlined" (click)="irARegistro()">
+        Crear cuenta
+      </button>
+    </div>
+  </div>
+</div>

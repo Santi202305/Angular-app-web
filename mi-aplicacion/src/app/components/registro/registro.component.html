@@ -1,0 +1,83 @@
+<div class="registro-container">
+  <div class="registro-card">
+    <div class="registro-header">
+      <h2>Registro</h2>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <input
+          type="text"
+          [(ngModel)]="nombreUsuario"
+          placeholder="Nombre de usuario"
+          class="form-input"
+        />
+        <button
+          class="clear-btn"
+          (click)="limpiarCampo('usuario')"
+          *ngIf="nombreUsuario"
+        >
+          <span class="close-icon">✕</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <input
+          type="email"
+          [(ngModel)]="correoElectronico"
+          placeholder="Correo electronico"
+          class="form-input"
+        />
+        <button
+          class="clear-btn"
+          (click)="limpiarCampo('correo')"
+          *ngIf="correoElectronico"
+        >
+          <span class="close-icon">✕</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <input
+          type="password"
+          [(ngModel)]="contrasena"
+          placeholder="Contraseña"
+          class="form-input"
+        />
+        <button
+          class="clear-btn"
+          (click)="limpiarCampo('contrasena')"
+          *ngIf="contrasena"
+        >
+          <span class="close-icon">✕</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <input
+          type="password"
+          [(ngModel)]="confirmeContrasena"
+          placeholder="Confirme contraseña"
+          class="form-input"
+        />
+        <button
+          class="clear-btn"
+          (click)="limpiarCampo('confirmar')"
+          *ngIf="confirmeContrasena"
+        >
+          <span class="close-icon">✕</span>
+        </button>
+      </div>
+    </div>
+
+    <button class="btn-iniciar" (click)="iniciarSesion()">
+      Iniciar sesión
+    </button>
+  </div>
+</div>
