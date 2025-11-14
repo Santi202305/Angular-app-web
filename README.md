@@ -41,9 +41,9 @@ http://localhost:4200
 
 ## 🏗️ Arquitectura
 ```
-Frontend (Angular)  →  API Gateway  →  Microservicios (Spring Boot)
-                                       ├── Usuario Service (8080)
-                                       └── Cliente Service (8081)
+Frontend (Angular)  →  API REST  →  Microservicios (Spring Boot)
+                                    ├── Usuario Service (8080)
+                                    └── Cliente Service (8081)
 ```
 
 ---
@@ -107,13 +107,11 @@ src/app/
 
 ---
 
-## 📦 Detalle de Servicios
+## 📦 Servicios Backend
 
 ### 👤 Usuario Service
-* **Responsable:** Nicolás Lozano ([@Nicolas-Lozano-Salazar](https://github.com/Nicolas-Lozano-Salazar))
-* **Repo:** [Usuario_serv](https://github.com/Nicolas-Lozano-Salazar/Usuario_serv)
-* **Docker:** `nicolasls/usuario-service:latest`
 * **Puerto:** 8080
+* **Base URL:** `http://localhost:8080`
 
 **Endpoints:**
 ```
@@ -124,9 +122,8 @@ DELETE /api/v1/usuario-service/usuarios
 ```
 
 ### 👥 Cliente Service
-* **Responsable:** Álvaro Salazar
-* **Docker:** `alvarosalazar/cliente-service:latest`
 * **Puerto:** 8081
+* **Base URL:** `http://localhost:8081`
 
 **Endpoints:**
 ```
@@ -171,7 +168,7 @@ services:
       - '5432:5432'
 
   cliente-service:
-    image: 'alvarosalazar/cliente-service:latest'
+    image: 'cliente-service:latest'
     ports:
       - '8081:8080'
     depends_on:
@@ -218,13 +215,11 @@ curl http://localhost:8081/api/v1/cliente-service/clientes
 
 ---
 
-## 👥 Equipo
+## 👨‍💻 Autor
 
-| Rol | Nombre | GitHub |
-|-----|--------|--------|
-| Frontend | Santiago García | [@Santi202305](https://github.com/Santi202305) |
-| Backend | Nicolás Lozano | [@Nicolas-Lozano-Salazar](https://github.com/Nicolas-Lozano-Salazar) |
-| Backend | Álvaro Salazar | @alvarosalazar |
+**Santiago García Granda**
+- GitHub: [@Santi202305](https://github.com/Santi202305)
+- Repositorio: [Angular-app-web](https://github.com/Santi202305/Angular-app-web.git)
 
 ---
 
@@ -233,17 +228,19 @@ curl http://localhost:8081/api/v1/cliente-service/clientes
 **Fecha:** 2025-01-15
 
 ### ✅ Completado
-- Sistema de autenticación
-- Dashboard funcional
-- CRUD de clientes
-- Validaciones de seguridad
-- Diseño responsive
+- Sistema de autenticación completo
+- Dashboard funcional con menú lateral
+- CRUD de clientes con validaciones
+- Validaciones de seguridad (XSS, SQL injection)
+- Diseño responsive mobile-first
+- Integración con SweetAlert2
 
-### 🔄 Pendiente
-- Integración JWT
-- Guards de rutas
-- Deploy en EC2
-- Tests unitarios
+### 🔄 En Desarrollo
+- Integración JWT para tokens
+- Guards de protección de rutas
+- Deploy en servidor
+- Tests unitarios y e2e
+- PWA (Progressive Web App)
 
 ---
 
@@ -262,3 +259,30 @@ Para dudas o sugerencias, crear un issue en GitHub.
 ---
 
 ⭐ Si te gusta el proyecto, dale una estrella en GitHub!
+```
+
+---
+
+## 🎯 **LICENSE actualizado**
+```
+MIT License
+
+Copyright (c) 2025 Santiago García Granda
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
