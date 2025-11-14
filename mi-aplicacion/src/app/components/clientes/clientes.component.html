@@ -1,0 +1,27 @@
+<div class="clientes-container">
+  <div class="header">
+    <h2>Lista de Clientes</h2>
+    <button class="btn-volver" routerLink="/dashboard">
+      ← Volver al Dashboard
+    </button>
+  </div>
+
+  <div class="clientes-list">
+    <div class="cliente-card" *ngFor="let cliente of clientes">
+      <div class="cliente-info">
+        <h3>{{ cliente.nombre }} {{ cliente.apellido }}</h3>
+        <p class="email">📧 {{ cliente.email }}</p>
+        <p class="region" *ngIf="cliente.region">
+          🌍 {{ cliente.region.nombre }}
+        </p>
+      </div>
+      <button class="btn-detalle" [routerLink]="['/clientes/detalle', cliente.id]">
+        Ver Detalle →
+      </button>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="clientes.length === 0">
+    <p>No hay clientes para mostrar</p>
+  </div>
+</div>

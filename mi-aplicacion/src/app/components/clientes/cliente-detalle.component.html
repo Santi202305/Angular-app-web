@@ -1,0 +1,71 @@
+<div class="detalle-container" *ngIf="cliente">
+  <div class="detalle-card">
+    <div class="detalle-header">
+      <h2>Detalle del Cliente</h2>
+      <button class="btn-volver" (click)="volver()">
+        ← Volver a la lista
+      </button>
+    </div>
+
+    <div class="detalle-content">
+      <div class="info-section">
+        <div class="info-row">
+          <div class="info-item">
+            <label>ID:</label>
+            <span>{{ cliente.id }}</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-item">
+            <label>Nombre:</label>
+            <span>{{ cliente.nombre }}</span>
+          </div>
+          <div class="info-item">
+            <label>Apellido:</label>
+            <span>{{ cliente.apellido }}</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-item full-width">
+            <label>Nombre completo:</label>
+            <span class="highlight">{{ cliente.nombre }} {{ cliente.apellido }}</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-item full-width">
+            <label>📧 Email:</label>
+            <span class="email-text">{{ cliente.email }}</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-item">
+            <label>📅 Fecha de creación:</label>
+            <span>{{ cliente.createAt | date:'dd/MM/yyyy' }}</span>
+          </div>
+        </div>
+
+        <div class="info-row" *ngIf="cliente.region">
+          <div class="info-item">
+            <label>🌍 Región:</label>
+            <span class="region-text">{{ cliente.region.nombre }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-eliminar" (click)="deleteCliente(cliente.id)">
+          🗑️ Eliminar Cliente
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="loading" *ngIf="!cliente">
+  <div class="spinner"></div>
+  <p>Cargando datos del cliente...</p>
+</div>

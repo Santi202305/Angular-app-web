@@ -76,4 +76,9 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem('usuario');
     this.router.navigate(['/registro']);
   }
+
+
+  irAClientes() {
+    this.router.navigate(['/clientes']);
+  }
 }
