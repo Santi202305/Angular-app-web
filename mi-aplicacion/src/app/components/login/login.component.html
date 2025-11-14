@@ -4,6 +4,12 @@
       <h2>Inicio de sesion</h2>
     </div>
 
+    <div class="mensaje-error" *ngIf="mensajeError">
+      ⚠️ {{ mensajeError }}
+    </div>
+
+    <div class="form-group">
+
     <div class="form-group">
       <div class="input-wrapper">
         <input
@@ -65,3 +71,4 @@
     </div>
   </div>
 </div>
+

@@ -171,3 +171,21 @@
   background-color: #7c5cbb;
   color: white;
 }
+
+.mensaje-error {
+  background-color: #fee;
+  border-left: 4px solid #dc3545;
+  color: #dc3545;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}

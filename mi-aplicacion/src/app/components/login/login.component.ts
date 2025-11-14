@@ -2,6 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ValidacionService } from '../../services/validacion.service';
+
+interface Usuario {
+  nombreUsuario: string;
+  email: string;
+  contrasena: string;
+}
 
 @Component({
   selector: 'app-login',
@@ -14,8 +21,21 @@ export class LoginComponent {
   nombreUsuario: string = '';
   contrasena: string = '';
   recordarme: boolean = false;
+  mensajeError: string = '';
 
-  constructor(private router: Router) {}
+  // Usuarios registrados (simulación - en producción iría a base de datos)
+  private usuariosRegistrados: Usuario[] = [];
+
+  constructor(
+    private router: Router,
+    private validacionService: ValidacionService
+  ) {
+    // Cargar usuarios de localStorage
+    const usuariosGuardados = localStorage.getItem('usuarios');
+    if (usuariosGuardados) {
+      this.usuariosRegistrados = JSON.parse(usuariosGuardados);
+    }
+  }
 
   limpiarCampo(campo: string) {
     if (campo === 'usuario') {
@@ -23,18 +43,39 @@ export class LoginComponent {
     } else if (campo === 'contrasena') {
       this.contrasena = '';
     }
+    this.mensajeError = '';
   }
 
   iniciarSesion() {
-    if (this.nombreUsuario && this.contrasena) {
-      localStorage.setItem('usuario', this.nombreUsuario);
-      if (this.recordarme) {
-        localStorage.setItem('recordar', 'true');
-      }
-      this.router.navigate(['/dashboard']);
-    } else {
-      alert('Por favor complete todos los campos');
+    this.mensajeError = '';
+
+    // Validar que los campos no estén vacíos
+    if (!this.nombreUsuario || !this.contrasena) {
+      this.mensajeError = 'Por favor complete todos los campos';
+      return;
     }
+
+    // Sanitizar entradas
+    const usuarioSanitizado = this.validacionService.sanitizar(this.nombreUsuario.trim());
+    const contrasenaSanitizada = this.validacionService.sanitizar(this.contrasena);
+
+    // Buscar usuario en la lista
+    const usuarioEncontrado = this.usuariosRegistrados.find(
+      u => u.nombreUsuario === usuarioSanitizado && u.contrasena === contrasenaSanitizada
+    );
+
+    if (!usuarioEncontrado) {
+      this.mensajeError = 'Usuario o contraseña incorrectos';
+      return;
+    }
+
+    // Login exitoso
+    localStorage.setItem('usuario', usuarioSanitizado);
+    if (this.recordarme) {
+      localStorage.setItem('recordar', 'true');
+    }
+
+    this.router.navigate(['/dashboard']);
   }
 
   irARegistro() {
@@ -42,6 +83,6 @@ export class LoginComponent {
   }
 
   olvidoContrasena() {
-    alert('Funcionalidad de recuperación de contraseña');
+    alert('Funcionalidad de recuperación de contraseña próximamente');
   }
 }
