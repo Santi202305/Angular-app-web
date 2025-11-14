@@ -4,13 +4,16 @@
       <h2>Registro</h2>
     </div>
 
+    <!-- Nombre de usuario -->
     <div class="form-group">
-      <div class="input-wrapper">
+      <div class="input-wrapper" [class.error]="errores.nombre">
         <input
           type="text"
           [(ngModel)]="nombreUsuario"
+          (input)="validarNombreEnTiempoReal()"
           placeholder="Nombre de usuario"
           class="form-input"
+          maxlength="50"
         />
         <button
           class="clear-btn"
@@ -20,13 +23,18 @@
           <span class="close-icon">✕</span>
         </button>
       </div>
+      <div class="error-mensaje" *ngIf="errores.nombre">
+        ⚠️ {{ errores.nombre }}
+      </div>
     </div>
 
+    <!-- Correo electrónico -->
     <div class="form-group">
-      <div class="input-wrapper">
+      <div class="input-wrapper" [class.error]="errores.email">
         <input
           type="email"
           [(ngModel)]="correoElectronico"
+          (input)="validarEmailEnTiempoReal()"
           placeholder="Correo electronico"
           class="form-input"
         />
@@ -38,15 +46,22 @@
           <span class="close-icon">✕</span>
         </button>
       </div>
+      <div class="error-mensaje" *ngIf="errores.email">
+        ⚠️ {{ errores.email }}
+      </div>
     </div>
 
+    <!-- Contraseña -->
     <div class="form-group">
-      <div class="input-wrapper">
+      <div class="input-wrapper" [class.error]="errores.contrasena">
         <input
           type="password"
           [(ngModel)]="contrasena"
+          (input)="validarContrasenaEnTiempoReal()"
+          (focus)="mostrarRequisitos = true"
           placeholder="Contraseña"
           class="form-input"
+          maxlength="50"
         />
         <button
           class="clear-btn"
@@ -56,15 +71,42 @@
           <span class="close-icon">✕</span>
         </button>
       </div>
+      <div class="error-mensaje" *ngIf="errores.contrasena">
+        ⚠️ {{ errores.contrasena }}
+      </div>
+
+      <!-- Requisitos de contraseña -->
+      <div class="requisitos-contrasena" *ngIf="mostrarRequisitos">
+        <p class="titulo-requisitos">La contraseña debe contener:</p>
+        <div class="requisito" [class.cumplido]="contrasena.length >= 8">
+          <span class="icono">{{ contrasena.length >= 8 ? '✓' : '○' }}</span>
+          Mínimo 8 caracteres
+        </div>
+        <div class="requisito" [class.cumplido]="contrasena.match('[A-Z]')">
+          <span class="icono">{{ contrasena.match('[A-Z]') ? '✓' : '○' }}</span>
+          Una letra mayúscula
+        </div>
+        <div class="requisito" [class.cumplido]="contrasena.match('[a-z]')">
+          <span class="icono">{{ contrasena.match('[a-z]') ? '✓' : '○' }}</span>
+          Una letra minúscula
+        </div>
+        <div class="requisito" [class.cumplido]="contrasena.match('[0-9]')">
+          <span class="icono">{{ contrasena.match('[0-9]') ? '✓' : '○' }}</span>
+          Un número
+        </div>
+      </div>
     </div>
 
+    <!-- Confirmar contraseña -->
     <div class="form-group">
-      <div class="input-wrapper">
+      <div class="input-wrapper" [class.error]="errores.confirmar">
         <input
           type="password"
           [(ngModel)]="confirmeContrasena"
+          (input)="validarConfirmarEnTiempoReal()"
           placeholder="Confirme contraseña"
           class="form-input"
+          maxlength="50"
         />
         <button
           class="clear-btn"
@@ -74,10 +116,23 @@
           <span class="close-icon">✕</span>
         </button>
       </div>
+      <div class="error-mensaje" *ngIf="errores.confirmar">
+        ⚠️ {{ errores.confirmar }}
+      </div>
+      <div class="success-mensaje" *ngIf="confirmeContrasena && !errores.confirmar && contrasena === confirmeContrasena">
+        ✓ Las contraseñas coinciden
+      </div>
     </div>
 
-    <button class="btn-iniciar" (click)="iniciarSesion()">
-      Iniciar sesión
+    <button class="btn-registrar" (click)="registrar()">
+      Registrarse
     </button>
+
+    <div class="footer-links">
+      <p>¿Ya tienes una cuenta?</p>
+      <button class="btn-login" (click)="irALogin()">
+        Iniciar sesión
+      </button>
+    </div>
   </div>
 </div>
