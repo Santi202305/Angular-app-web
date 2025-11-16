@@ -1,135 +1,149 @@
-.clientes-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 30px;
+.container {
+  max-width: 1000px;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  padding-bottom: 50px;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.header h2 {
-  color: #333;
-  font-size: 28px;
-  margin: 0;
-}
-
-.btn-volver {
-  padding: 12px 24px;
-  background-color: #7c5cbb;
-  color: white;
+.card {
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: background-color 0.3s;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.btn-volver:hover {
-  background-color: #6a4da3;
+.card-header {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 1.2rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
 }
 
-.clientes-list {
-  display: grid;
-  gap: 20px;
-}
-
-.cliente-card {
-  background: white;
-  border-radius: 8px;
-  padding: 25px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.header-title {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  transition: all 0.3s;
-}
-
-.cliente-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-.cliente-info {
-  flex: 1;
-}
-
-.cliente-info h3 {
-  margin: 0 0 10px 0;
-  color: #333;
-  font-size: 22px;
+  gap: 10px;
   font-weight: 600;
 }
 
-.cliente-info p {
-  margin: 5px 0;
-  color: #666;
-  font-size: 14px;
+.list-group-item {
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+  padding: 1.2rem 1.5rem;
 }
 
-.email {
-  color: #00a8e8;
-  font-weight: 500;
+.list-group-item:hover {
+  background-color: #f8f9fa;
+  border-left-color: #667eea;
+  transform: translateX(5px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.region {
-  color: #7c5cbb;
-  font-weight: 500;
-}
-
-.btn-detalle {
-  padding: 12px 24px;
-  background-color: #00a8e8;
+/* Avatar */
+.avatar-placeholder {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s;
-  white-space: nowrap;
-  margin-left: 20px;
-}
-
-.btn-detalle:hover {
-  background-color: #0090c9;
-  transform: scale(1.05);
-}
-
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  background: white;
-  border-radius: 8px;
-  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
   font-size: 18px;
+  text-transform: uppercase;
+}
+
+.rounded-circle {
+  object-fit: cover;
+  border: 3px solid #e9ecef;
+}
+
+/* Botones */
+.btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.btn-warning {
+  color: white;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-info {
+  color: white;
+  background-color: #17a2b8;
+}
+
+.btn-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(23, 162, 184, 0.3);
+}
+
+/* Iconos */
+fa-icon {
+  font-size: 14px;
+}
+
+.fas {
+  margin-right: 6px;
+}
+
+/* Info del cliente */
+h5 {
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.text-muted {
+  font-size: 0.875rem;
+}
+
+/* Empty state */
+.fa-inbox {
+  color: #dee2e6;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .header {
+  .list-group-item {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 15px;
+  }
+
+  .btn-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .card-header {
     flex-direction: column;
     gap: 15px;
   }
 
-  .cliente-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .btn-detalle {
-    margin-left: 0;
-    margin-top: 15px;
+  .btn-light {
     width: 100%;
   }
 }

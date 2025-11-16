@@ -1,27 +1,79 @@
-<div class="clientes-container">
-  <div class="header">
-    <h2>Lista de Clientes</h2>
-    <button class="btn-volver" routerLink="/dashboard">
-      ← Volver al Dashboard
-    </button>
-  </div>
+<div class="container mt-4">
+  <h2 class="text-center mb-4">
+    <i class="fas fa-users"></i> Lista de Clientes
+  </h2>
 
-  <div class="clientes-list">
-    <div class="cliente-card" *ngFor="let cliente of clientes">
-      <div class="cliente-info">
-        <h3>{{ cliente.nombre }} {{ cliente.apellido }}</h3>
-        <p class="email">📧 {{ cliente.email }}</p>
-        <p class="region" *ngIf="cliente.region">
-          🌍 {{ cliente.region.nombre }}
-        </p>
-      </div>
-      <button class="btn-detalle" [routerLink]="['/clientes/detalle', cliente.id]">
-        Ver Detalle →
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <span class="header-title">
+        Clientes Registrados ({{ clientes.length }})
+      </span>
+      <button class="btn btn-light btn-sm" (click)="addCliente()">
+        <i class="fas fa-user-plus"></i> Añadir Cliente
+      </button>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item d-flex justify-content-between align-items-center"
+          *ngFor="let cliente of clientes">
+        <div class="d-flex align-items-center">
+          <img
+            *ngIf="cliente.foto"
+            [src]="cliente.foto"
+            alt="Foto de {{ cliente.nombre }}"
+            class="rounded-circle me-3"
+            width="50"
+            height="50"
+          />
+          <div class="avatar-placeholder rounded-circle me-3" *ngIf="!cliente.foto">
+            {{ cliente.nombre.charAt(0) }}{{ cliente.apellido.charAt(0) }}
+          </div>
+          <div>
+            <h5 class="mb-0">{{ cliente.nombre }} {{ cliente.apellido }}</h5>
+            <small class="text-muted">
+              <i class="fas fa-envelope"></i> {{ cliente.email }}
+            </small>
+            <br>
+            <small class="text-muted" *ngIf="cliente.region">
+              <i class="fas fa-globe"></i> {{ cliente.region.nombre }}
+            </small>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-sm btn-info me-1"
+                  [routerLink]="['/clientes/detalle', cliente.id]"
+                  title="Ver detalle">
+            <i class="fas fa-eye"></i>
+          </button>
+          <button class="btn btn-sm btn-warning me-1"
+                  (click)="editCliente(cliente)"
+                  title="Editar">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn btn-sm btn-danger"
+                  (click)="confirmDelete(cliente.id)"
+                  title="Eliminar">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </li>
+    </ul>
+
+    <div class="card-body text-center py-5" *ngIf="clientes.length === 0">
+      <p class="text-muted mb-3">
+        <i class="fas fa-inbox fa-4x"></i>
+      </p>
+      <h5 class="text-muted mb-3">No hay clientes registrados</h5>
+      <button class="btn btn-primary" (click)="addCliente()">
+        <i class="fas fa-user-plus"></i> Añadir Primer Cliente
       </button>
     </div>
   </div>
 
-  <div class="empty-state" *ngIf="clientes.length === 0">
-    <p>No hay clientes para mostrar</p>
+  <div class="mt-4 text-center">
+    <button class="btn btn-secondary" routerLink="/dashboard">
+      <i class="fas fa-arrow-left"></i> Volver al Dashboard
+    </button>
   </div>
 </div>
