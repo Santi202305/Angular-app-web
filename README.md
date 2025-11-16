@@ -212,6 +212,22 @@ curl http://localhost:8081/api/v1/cliente-service/clientes
 - Al menos 1 número
 - Sin código HTML/JavaScript
 ```
+## 📸 Screenshots
+
+### Login
+![Login](./screenshots/login.png)
+
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
+
+### Lista de Clientes
+![Clientes](./screenshots/clientes-lista.png)
+
+### Crear Cliente
+![Crear](./screenshots/crear-cliente.png)
+
+### Editar Cliente
+![Editar](./screenshots/editar-cliente.png)
 
 ---
 
