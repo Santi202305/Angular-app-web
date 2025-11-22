@@ -1,79 +1,61 @@
 <div class="dashboard-container">
   <!-- Header -->
-  <header class="header">
-    <div class="header-content">
-      <div class="bienvenida">Bienvenido, {{ nombreUsuario }}!</div>
-      <div class="header-actions">
-        <button class="notification-btn">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-        </button>
-        <button class="search-toggle-btn" (click)="toggleBusqueda()">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.35-4.35"></path>
-          </svg>
-        </button>
+  <header class="dashboard-header">
+    <div class="welcome-section">
+      <h1>Bienvenido, {{ nombreUsuario }}!</h1>
+    </div>
+
+    <div class="header-actions">
+      <!-- Botón de notificaciones -->
+      <button class="icon-btn" title="Notificaciones">
+        🔔
+      </button>
+
+      <!-- Botón de búsqueda -->
+      <button class="icon-btn" (click)="toggleBusqueda()" title="Buscar">
+        🔍
+      </button>
+
+      <!-- Campo de búsqueda (se muestra al hacer clic) -->
+      <div class="search-container" *ngIf="mostrarBusqueda">
+        <input
+          type="text"
+          [(ngModel)]="busqueda"
+          placeholder="Buscar..."
+          class="search-input"
+          (blur)="cerrarBusqueda()"
+        >
       </div>
     </div>
   </header>
 
-  <!-- Barra de búsqueda -->
-  <div class="search-bar" *ngIf="mostrarBusqueda">
-    <button class="back-btn" (click)="cerrarBusqueda()">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M19 12H5M12 19l-7-7 7-7"></path>
-      </svg>
+  <!-- Menú de navegación rápida -->
+  <nav class="quick-nav">
+    <button class="nav-item" (click)="irACursos()">
+      📚 Materias/Cursos
     </button>
-    <input
-      type="text"
-      [(ngModel)]="busqueda"
-      placeholder="search"
-      class="search-input"
-      autofocus
-    />
-    <button class="close-search-btn" (click)="cerrarBusqueda()">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
+    <button class="nav-item" (click)="irAClientes()">
+      👥 Clientes
     </button>
-  </div>
+    <button class="nav-item" (click)="irALagrange()">
+      📊 Lagrange
+    </button>
+    <button class="nav-item logout" (click)="cerrarSesion()">
+      🚪 Cerrar sesión
+    </button>
+  </nav>
 
-  <div class="main-layout">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <nav class="nav-menu">
-        <button class="nav-item">Materias/Cursos</button>
-        <button class="nav-item">Mensajes</button>
-        <button class="nav-item" (click)="irAClientes()">Clientes</button>
-        <button class="nav-item">Configuración</button>
-        <button class="nav-item logout" (click)="cerrarSesion()">Cerrar sesión</button>
-      </nav>
-    </aside>
-
-    <!-- Contenido principal -->
-    <main class="content">
-      <div class="tarjetas-grid">
-        <div class="tarjeta" *ngFor="let tarjeta of tarjetas">
-          <div class="tarjeta-header">
-            <div class="info-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M12 16v-4"></path>
-                <path d="M12 8h.01"></path>
-              </svg>
-            </div>
-            <h3 class="tarjeta-titulo">{{ tarjeta.titulo }}</h3>
-          </div>
-          <p class="tarjeta-descripcion">{{ tarjeta.descripcion }}</p>
-          <button class="tarjeta-btn" (click)="accionTarjeta(tarjeta.id)">
-            {{ tarjeta.textoBoton }}
-          </button>
-        </div>
-      </div>
-    </main>
+  <!-- Grid de tarjetas -->
+  <div class="cards-grid">
+    <div
+      class="card"
+      *ngFor="let tarjeta of tarjetas"
+      (click)="accionTarjeta(tarjeta)"
+    >
+      <div class="card-icon">{{ tarjeta.icono }}</div>
+      <h3 class="card-title">{{ tarjeta.titulo }}</h3>
+      <p class="card-description">{{ tarjeta.descripcion }}</p>
+      <button class="card-button">{{ tarjeta.textoBoton }}</button>
+    </div>
   </div>
 </div>

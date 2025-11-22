@@ -1,0 +1,76 @@
+<div class="lagrange-container">
+  <div class="card">
+    <h2 class="title">Calculadora de Lagrange</h2>
+
+    <!-- Puntos de datos -->
+    <div class="puntos-section">
+      <h3>Puntos de datos (X, Y)</h3>
+
+      <div class="punto-row" *ngFor="let punto of puntos; let i = index">
+        <div class="input-group">
+          <label>X{{ i + 1 }}</label>
+          <input
+            type="number"
+            [(ngModel)]="punto.x"
+            placeholder="Valor de X"
+            class="input-field"
+          >
+        </div>
+
+        <div class="input-group">
+          <label>Y{{ i + 1 }}</label>
+          <input
+            type="number"
+            [(ngModel)]="punto.y"
+            placeholder="Valor de Y"
+            class="input-field"
+          >
+        </div>
+
+        <button
+          *ngIf="puntos.length > 2"
+          (click)="eliminarPunto(i)"
+          class="btn-delete"
+          title="Eliminar punto"
+        >
+          ✕
+        </button>
+      </div>
+
+      <button (click)="agregarPunto()" class="btn-add">
+        + Agregar punto
+      </button>
+    </div>
+
+    <!-- Valor a interpolar -->
+    <div class="interpolar-section">
+      <div class="input-group">
+        <label>Valor X a interpolar</label>
+        <input
+          type="number"
+          [(ngModel)]="xInterpolar"
+          placeholder="Ingrese el valor de X"
+          class="input-field"
+        >
+      </div>
+    </div>
+
+    <!-- Botón calcular -->
+    <button (click)="calcular()" class="btn-calculate">
+      Calcular
+    </button>
+
+    <!-- Resultado -->
+    <div class="resultado-section" *ngIf="resultado !== null">
+      <label>RESULTADO:</label>
+      <div class="resultado-value">
+        {{ resultado | number:'1.2-6' }}
+      </div>
+    </div>
+
+    <!-- Botón limpiar -->
+    <button (click)="limpiar()" class="btn-clear">
+      Limpiar
+    </button>
+  </div>
+</div>

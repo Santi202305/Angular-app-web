@@ -8,6 +8,8 @@ interface Tarjeta {
   titulo: string;
   descripcion: string;
   textoBoton: string;
+  icono: string;
+  ruta?: string;
 }
 
 @Component({
@@ -25,34 +27,42 @@ export class DashboardComponent implements OnInit {
   tarjetas: Tarjeta[] = [
     {
       id: 1,
-      titulo: 'Title',
-      descripcion: 'Body text for whatever you\'d like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.',
-      textoBoton: 'Button'
+      titulo: 'Gestión de Cursos',
+      descripcion: 'Administra y visualiza todos los cursos disponibles. Crea, edita y elimina cursos según sea necesario.',
+      textoBoton: 'Ver Cursos',
+      icono: '📚',
+      ruta: '/cursos'
     },
     {
       id: 2,
-      titulo: 'Title',
-      descripcion: 'Body text for whatever you\'d like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.',
-      textoBoton: 'Button'
+      titulo: 'Gestión de Clientes',
+      descripcion: 'Administra la información de tus clientes. Visualiza, agrega y actualiza datos de contacto.',
+      textoBoton: 'Ver Clientes',
+      icono: '👥',
+      ruta: '/clientes'
     },
     {
       id: 3,
-      titulo: 'Title',
-      descripcion: 'Body text for whatever you\'d like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.',
-      textoBoton: 'Button'
+      titulo: 'Calculadora de Lagrange',
+      descripcion: 'Herramienta de interpolación polinómica de Lagrange. Calcula valores interpolados basados en puntos de datos conocidos.',
+      textoBoton: 'Abrir Calculadora',
+      icono: '📊',
+      ruta: '/lagrange'
     },
     {
       id: 4,
-      titulo: 'Title',
-      descripcion: 'Body text for whatever you\'d like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.',
-      textoBoton: 'Button'
+      titulo: 'Mensajes',
+      descripcion: 'Revisa y gestiona todos tus mensajes. Mantente en contacto con tus clientes y colaboradores.',
+      textoBoton: 'Ver Mensajes',
+      icono: '💬',
+      ruta: '/mensajes'
     }
   ];
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.nombreUsuario = localStorage.getItem('usuario') || 'Username';
+    this.nombreUsuario = localStorage.getItem('usuario') || 'Santiago';
   }
 
   toggleBusqueda() {
@@ -67,9 +77,13 @@ export class DashboardComponent implements OnInit {
     this.busqueda = '';
   }
 
-  accionTarjeta(id: number) {
-    console.log('Acción de tarjeta:', id);
-    alert(`Acción ejecutada en tarjeta ${id}`);
+  accionTarjeta(tarjeta: Tarjeta) {
+    if (tarjeta.ruta) {
+      this.router.navigate([tarjeta.ruta]);
+    } else {
+      console.log('Acción de tarjeta:', tarjeta.id);
+      alert(`Acción ejecutada en tarjeta ${tarjeta.titulo}`);
+    }
   }
 
   cerrarSesion() {
@@ -77,8 +91,15 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/registro']);
   }
 
-
   irAClientes() {
     this.router.navigate(['/clientes']);
+  }
+
+  irACursos() {
+    this.router.navigate(['/cursos']);
+  }
+
+  irALagrange() {
+    this.router.navigate(['/lagrange']);
   }
 }
