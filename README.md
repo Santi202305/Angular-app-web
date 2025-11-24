@@ -52,13 +52,22 @@ Frontend (Angular)  →  API REST  →  Microservicios (Spring Boot)
 ```
 src/app/
 ├── components/
-│   ├── login/              # Inicio de sesión
-│   ├── registro/           # Registro de usuarios
+│   ├── clientes/           # Gestión de clientes
+│   ├── cuestionario/       # Ova Arquitectura
+│   ├── cursos/             # Gestion De Cursos
 │   ├── dashboard/          # Panel principal
-│   └── clientes/           # Gestión de clientes
+│   ├── lagrange/           # Ova Analisis Numerico
+│   ├── login/              # Inicio de sesión
+│   └── registro/           # Registro de usuarios
+├── environments/
+│   ├── environment.prod    # Gestión de clientes
+│   └── environment         # Registro de usuarios
 ├── models/                 # Interfaces TypeScript
+│   ├── clientes/           # Gestión de clientes
+│   └── curso/              # Gestion De Cursos
 ├── services/               # Servicios HTTP
 │   ├── cliente.service.ts
+│   ├── curso.service.ts
 │   └── validacion.service.ts
 └── app.routes.ts           # Configuración de rutas
 ```
@@ -88,6 +97,8 @@ src/app/
 | Dashboard | `/dashboard` | Panel con menú lateral |
 | Clientes | `/clientes` | Lista de clientes |
 | Detalle | `/clientes/detalle/:id` | Ver/Eliminar cliente |
+| Lagrange | `/lagrange` | Ova Analisis Numerico |
+| Cuestionario | `/cuestionario` | Ova Arquitectura |
 
 ---
 
