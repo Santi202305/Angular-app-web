@@ -1,0 +1,55 @@
+<div class="cuestionario-container">
+  <div class="card">
+    <div class="header">
+      <h1>Pregunta</h1>
+    </div>
+
+    <ng-container *ngIf="pregunta$ | async as pregunta; else loading">
+      <div class="question">{{ pregunta.texto }}</div>
+
+      <div class="options">
+        <button
+          *ngFor="let op of pregunta.opciones; let i = index"
+          (click)="responder(i, pregunta)"
+          [disabled]="resultado !== null"
+          class="option"
+          [ngClass]="{
+            active: resultado === null,
+            disabled: resultado !== null,
+            correct: resultado?.resultado && resultado?.correctaIndex === i,
+            incorrect: !resultado?.resultado && resultado?.correctaIndex === i
+          }"
+        >
+          {{ op.texto }}
+        </button>
+      </div>
+
+      <div class="feedback" [ngClass]="{
+        show: resultado !== null,
+        correct: resultado?.resultado,
+        incorrect: !resultado?.resultado
+      }">
+        {{ resultado?.mensaje }}
+      </div>
+
+      <div class="button-group">
+        <button
+          class="btn-next"
+          (click)="reintentar()"
+          [disabled]="resultado === null || cargando"
+        >
+          Siguiente Pregunta
+        </button>
+      </div>
+
+    </ng-container>
+
+    <ng-template #loading>
+      <div *ngIf="cargando" class="loading">
+        <span>Cargando pregunta...</span>
+      </div>
+      <div *ngIf="error" class="error-text">{{ error }}</div>
+    </ng-template>
+  </div>
+
+</div>

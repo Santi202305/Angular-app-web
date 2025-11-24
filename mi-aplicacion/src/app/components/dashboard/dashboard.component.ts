@@ -56,6 +56,14 @@ export class DashboardComponent implements OnInit {
       textoBoton: 'Ver Mensajes',
       icono: '💬',
       ruta: '/mensajes'
+    },
+        {
+      id: 5,
+      titulo: 'Cuestionario',
+      descripcion: 'Pon a prueba tus conocimientos sobre la arquitectura de la computacion, docker y el uso de librerias dinamicas y estaticas y sus usos.',
+      textoBoton: 'Ver Cuesionario',
+      icono: '💬',
+      ruta: '/cuestionario'
     }
   ];
 
@@ -101,5 +109,9 @@ export class DashboardComponent implements OnInit {
 
   irALagrange() {
     this.router.navigate(['/lagrange']);
+  }
+
+  irACuestionario() {
+    this.router.navigate(['/cuestionario']);
   }
 }

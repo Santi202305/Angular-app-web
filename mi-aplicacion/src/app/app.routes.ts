@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LagrangeComponent } from './components/lagrange/lagrange.component';
+import { PreguntaComponent } from './components/cuestionario/pregunta.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -9,6 +10,7 @@ import { CursosComponent } from './components/cursos/cursos.component';
 
 export const routes: Routes = [
   { path: 'lagrange', component: LagrangeComponent },
+  { path: 'cuestionario', component: PreguntaComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
